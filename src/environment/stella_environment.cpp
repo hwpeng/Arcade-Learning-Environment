@@ -229,6 +229,7 @@ void StellaEnvironment::pressSelect(size_t num_steps) {
   }
   processScreen();
   processRAM();
+  processTIA();
   emulate(PLAYER_A_NOOP, PLAYER_B_NOOP);
   m_state.incrementFrame();
 }
@@ -265,9 +266,10 @@ void StellaEnvironment::emulate(Action player_a_action, Action player_b_action,
     }
   }
 
-  // Parse screen and RAM into their respective data structures
+  // Parse screen, RAM, and TIA into their respective data structures
   processScreen();
   processRAM();
+  processTIA();
 }
 
 /** Accessor methods for the environment state. */
@@ -301,6 +303,15 @@ void StellaEnvironment::processRAM() {
 void StellaEnvironment::setRAM(size_t memory_index, byte_t value) {
   m_osystem->console().system().poke(memory_index + 0x80, value);
   *m_ram.byte(memory_index) = value;
+}
+
+void StellaEnvironment::processTIA() {
+  // Copy TIA over
+  uint8_t * read_tia;
+  read_tia =  m_osystem->console().system().tia().peek_tia();
+
+  for (size_t i = 0; i < m_tia.size(); i++)
+    *m_tia.byte(i) = read_tia[i];
 }
 
 }  // namespace ale

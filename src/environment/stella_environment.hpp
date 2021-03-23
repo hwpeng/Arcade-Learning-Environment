@@ -19,6 +19,7 @@
 #define __STELLA_ENVIRONMENT_HPP__
 
 #include "environment/ale_ram.hpp"
+#include "environment/ale_tia.hpp"
 #include "environment/ale_screen.hpp"
 #include "environment/ale_state.hpp"
 #include "environment/phosphor_blend.hpp"
@@ -114,6 +115,8 @@ class StellaEnvironment {
 
   void setRAM(size_t memory_index, byte_t value);
 
+  const ALETIA& getTIA() const { return m_tia; }
+
  private:
   /** This applies an action exactly one time step. Helper function to act(). */
   reward_t oneStepAct(Action player_a_action, Action player_b_action);
@@ -130,6 +133,8 @@ class StellaEnvironment {
   void processScreen();
   /** Processes the emulator RAM and saves it in m_ram */
   void processRAM();
+  /** Processes the emulator TIA and saves it in m_tia*/
+  void processTIA();
 
  private:
   OSystem* m_osystem;
@@ -142,6 +147,7 @@ class StellaEnvironment {
   ALEState m_state;   // Current environment state
   ALEScreen m_screen; // The current ALE screen (possibly colour-averaged)
   ALERAM m_ram;       // The current ALE RAM
+  ALETIA m_tia;       // The current ALE TIA
 
   bool m_use_paddles; // Whether this game uses paddles
 

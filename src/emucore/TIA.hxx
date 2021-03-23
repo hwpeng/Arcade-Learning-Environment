@@ -127,6 +127,9 @@ class TIA : public Device , public MediaSource
     */
     virtual void poke(uInt16 address, uInt8 value);
 
+
+    virtual uInt8 * peek_tia();
+
   public:
     /**
       This method should be called at an interval corresponding to

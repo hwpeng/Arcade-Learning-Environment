@@ -54,6 +54,8 @@ class ALEPythonInterface : public ALEInterface {
   inline uint32_t getRAMSize() { return ALEInterface::getRAM().size(); }
   const py::array_t<uint8_t, py::array::c_style> getRAM();
   void getRAM(py::array_t<uint8_t, py::array::c_style>& buffer);
+
+  const py::array_t<uint8_t, py::array::c_style> getTIA();
 };
 
 } // namespace ale
@@ -175,6 +177,9 @@ PYBIND11_MODULE(ale_py, m) {
                          py::array_t<uint8_t, py::array::c_style>&)) &
                          ale::ALEPythonInterface::getRAM)
       .def("setRAM", &ale::ALEPythonInterface::setRAM)
+      .def("getTIA", (const py::array_t<uint8_t, py::array::c_style> (
+                         ale::ALEPythonInterface::*)()) &
+                         ale::ALEPythonInterface::getTIA)
       .def("saveState", &ale::ALEPythonInterface::saveState)
       .def("loadState", &ale::ALEPythonInterface::loadState)
       .def("cloneState", &ale::ALEPythonInterface::cloneState)

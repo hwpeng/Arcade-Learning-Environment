@@ -397,6 +397,9 @@ void ALEInterface::setRAM(size_t memory_index, byte_t value) {
   return environment->setRAM(memory_index, value);
 }
 
+// Returns the current TIA content
+const ALETIA& ALEInterface::getTIA() { return environment->getTIA(); }
+
 // Saves the state of the system
 void ALEInterface::saveState() { environment->save(); }
 

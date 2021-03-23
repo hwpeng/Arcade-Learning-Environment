@@ -189,4 +189,12 @@ void ALEPythonInterface::getRAM(
   std::copy(ram.array(), ram.array() + ram.size(), dst);
 }
 
+const py::array_t<uint8_t, py::array::c_style> ALEPythonInterface::getTIA() {
+  const ALETIA& tia = ALEInterface::getTIA();
+
+  // Construct new py::array which copies RAM
+  py::array_t<uint8_t, py::array::c_style> tia_array(tia.size(), tia.array());
+  return tia_array;
+}
+
 } // namespace ale

@@ -168,6 +168,10 @@ class ALEInterface {
 
   void setRAM(size_t memory_index, byte_t value);
 
+  // Returns the current TIA content
+  const ALETIA& getTIA();
+
+
   // Saves the state of the system
   void saveState();
 

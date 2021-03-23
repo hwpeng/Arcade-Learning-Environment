@@ -2133,6 +2133,86 @@ uInt8 TIA::peek(uInt16 addr)
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+uInt8 * TIA::peek_tia()
+{
+  // Update frame to current color clock before we look at anything!
+  updateFrame(mySystem->cycles() * 3);
+
+  static uInt8 tia_regs[0x2A] = {0};
+
+  tia_regs[0x00] = myVSYNC;
+  tia_regs[0x01] = myVSYNC;
+  tia_regs[0x04] = myNUSIZ0;
+  tia_regs[0x05] = myNUSIZ0;
+  tia_regs[0x06] = myCOLUP0 & 0xFF;
+  tia_regs[0x07] = myCOLUP1 & 0xFF;
+  tia_regs[0x08] = myCOLUPF & 0xFF;
+  tia_regs[0x09] = myCOLUBK & 0xFF;
+  tia_regs[0x0A] = myCTRLPF;
+  tia_regs[0x0B] = myREFP0;
+  tia_regs[0x0C] = myREFP1;
+  tia_regs[0x0D] = myPF & 0x0000000F;
+  tia_regs[0x0E] = myPF & 0x00000FF0;
+  tia_regs[0x0F] = myPF & 0x000FF000;
+  tia_regs[0x15] = myAUDC0;
+  tia_regs[0x16] = myAUDC1;
+  tia_regs[0x17] = myAUDF0;
+  tia_regs[0x18] = myAUDF1;
+  tia_regs[0x19] = myAUDV0;
+  tia_regs[0x1A] = myAUDV1;
+  tia_regs[0x1B] = myGRP0;
+  tia_regs[0x1C] = myGRP1;
+  tia_regs[0x1D] = myENAM0;
+  tia_regs[0x1E] = myENAM1;
+  tia_regs[0x1F] = myENABL;
+  tia_regs[0x20] = myHMP0;
+  tia_regs[0x21] = myHMP1;
+  tia_regs[0x22] = myHMM0;
+  tia_regs[0x23] = myHMM1;
+  tia_regs[0x24] = myHMBL;
+  tia_regs[0x25] = myVDELP0;
+  tia_regs[0x26] = myVDELP1;
+  tia_regs[0x27] = myVDELBL;
+  tia_regs[0x28] = myRESMP0;
+  tia_regs[0x29] = myRESMP1;
+
+  return tia_regs; 
+
+  // switch(addr & 0x003f)
+  // {
+  //   case 0x00:    
+  //     return myVSYNC;
+  //   case 0x01:
+  //     return myVBLANK;
+  //   case 0x04:
+  //     return myNUSIZ0;
+  //   case 0x05:
+  //     return myNUSIZ1;
+  //   case 0x06:
+  //     return myCOLUP0;
+  //   case 0x07:
+  //     return myCOLUP1;
+  //   case 0x08:
+  //     return myCOLUPF;
+  //   case 0x09:
+  //     return myCOLUBK;
+  //   case 0x0A:
+  //     return myCTRLPF;
+  //   case 0x0B:
+  //     return myREFP0;
+  //   case 0x0C:
+  //     return myREFP1;
+  //   case 0x0D:
+  //   case 0x0E:
+  //   case 0x0F:
+  //     return myPF;
+  //   default:
+  //     return 77;
+  // }
+}
+      
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void TIA::poke(uInt16 addr, uInt8 value)
 {
   addr = addr & 0x003f;
