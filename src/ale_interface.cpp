@@ -400,6 +400,9 @@ void ALEInterface::setRAM(size_t memory_index, byte_t value) {
 // Returns the current TIA content
 const ALETIA& ALEInterface::getTIA() { return environment->getTIA(); }
 
+// Returns the current CPU content
+const ALECPU& ALEInterface::getCPU() { return environment->getCPU(); }
+
 // Saves the state of the system
 void ALEInterface::saveState() { environment->save(); }
 

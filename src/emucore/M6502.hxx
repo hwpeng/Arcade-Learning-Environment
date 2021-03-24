@@ -128,6 +128,9 @@ class M6502
     */
     virtual const char* name() const = 0;
 
+
+    virtual uInt8 * peek_cpu();
+
   public:
     /**
       Get the addressing mode of the specified instruction

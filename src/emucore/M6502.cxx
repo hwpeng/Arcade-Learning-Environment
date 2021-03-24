@@ -153,6 +153,39 @@ void M6502::PS(uInt8 ps)
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+uInt8 * M6502::peek_cpu()
+{
+  static uInt8 cpu_regs[8] = {0};
+
+  // CPU registers
+  cpu_regs[0] = A;
+  cpu_regs[1] = X;
+  cpu_regs[2] = Y;
+  cpu_regs[3] = SP;
+  cpu_regs[4] = IR;
+  cpu_regs[5] = PC & (0xFF);
+  cpu_regs[6] = (PC >> 8) & (0xFF);
+
+  // CPU flags
+  if (N)
+    cpu_regs[7] |= 1 << 6;
+  if (V)
+    cpu_regs[7] |= 1 << 5;
+  if (B)
+    cpu_regs[7] |= 1 << 4;
+  if (D)
+    cpu_regs[7] |= 1 << 3;
+  if (I)
+    cpu_regs[7] |= 1 << 2;
+  if (notZ)
+    cpu_regs[7] |= 1 << 1;
+  if (C)
+    cpu_regs[7] |= 1;
+
+  return cpu_regs;
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ostream& operator<<(ostream& out, const M6502::AddressingMode& mode)
 {
   switch(mode)

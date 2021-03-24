@@ -192,9 +192,17 @@ void ALEPythonInterface::getRAM(
 const py::array_t<uint8_t, py::array::c_style> ALEPythonInterface::getTIA() {
   const ALETIA& tia = ALEInterface::getTIA();
 
-  // Construct new py::array which copies RAM
+  // Construct new py::array which copies TIA
   py::array_t<uint8_t, py::array::c_style> tia_array(tia.size(), tia.array());
   return tia_array;
+}
+
+const py::array_t<uint8_t, py::array::c_style> ALEPythonInterface::getCPU() {
+  const ALECPU& cpu = ALEInterface::getCPU();
+
+  // Construct new py::array which copies CPU
+  py::array_t<uint8_t, py::array::c_style> cpu_array(cpu.size(), cpu.array());
+  return cpu_array;
 }
 
 } // namespace ale

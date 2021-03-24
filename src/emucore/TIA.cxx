@@ -2211,6 +2211,13 @@ uInt8 * TIA::peek_tia()
   // }
 }
       
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+uInt8 * TIA::peek_cpu_from_tia()
+{
+  static uint8_t * read_cpu;
+  read_cpu = mySystem->m6502().peek_cpu();
+  return read_cpu;
+}
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void TIA::poke(uInt16 addr, uInt8 value)

@@ -130,6 +130,8 @@ class TIA : public Device , public MediaSource
 
     virtual uInt8 * peek_tia();
 
+    virtual uInt8 * peek_cpu_from_tia();
+
   public:
     /**
       This method should be called at an interval corresponding to

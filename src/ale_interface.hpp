@@ -171,6 +171,8 @@ class ALEInterface {
   // Returns the current TIA content
   const ALETIA& getTIA();
 
+  // Returns the current CPU content
+  const ALECPU& getCPU();
 
   // Saves the state of the system
   void saveState();
