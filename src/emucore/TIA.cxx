@@ -2141,9 +2141,9 @@ uInt8 * TIA::peek_tia()
   static uInt8 tia_regs[0x2A] = {0};
 
   tia_regs[0x00] = myVSYNC;
-  tia_regs[0x01] = myVSYNC;
+  tia_regs[0x01] = myVBLANK;
   tia_regs[0x04] = myNUSIZ0;
-  tia_regs[0x05] = myNUSIZ0;
+  tia_regs[0x05] = myNUSIZ1;
   tia_regs[0x06] = myCOLUP0 & 0xFF;
   tia_regs[0x07] = myCOLUP1 & 0xFF;
   tia_regs[0x08] = myCOLUPF & 0xFF;
@@ -2177,38 +2177,6 @@ uInt8 * TIA::peek_tia()
   tia_regs[0x29] = myRESMP1;
 
   return tia_regs; 
-
-  // switch(addr & 0x003f)
-  // {
-  //   case 0x00:    
-  //     return myVSYNC;
-  //   case 0x01:
-  //     return myVBLANK;
-  //   case 0x04:
-  //     return myNUSIZ0;
-  //   case 0x05:
-  //     return myNUSIZ1;
-  //   case 0x06:
-  //     return myCOLUP0;
-  //   case 0x07:
-  //     return myCOLUP1;
-  //   case 0x08:
-  //     return myCOLUPF;
-  //   case 0x09:
-  //     return myCOLUBK;
-  //   case 0x0A:
-  //     return myCTRLPF;
-  //   case 0x0B:
-  //     return myREFP0;
-  //   case 0x0C:
-  //     return myREFP1;
-  //   case 0x0D:
-  //   case 0x0E:
-  //   case 0x0F:
-  //     return myPF;
-  //   default:
-  //     return 77;
-  // }
 }
       
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
